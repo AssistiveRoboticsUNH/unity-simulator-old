@@ -32,6 +32,7 @@ public class OdomPublisher : MonoBehaviour
     {
         ros = ROSConnection.GetOrCreateInstance();
         ros.RegisterPublisher<OdometryMsg>(topicName);
+
     }
 
     // Update is called once per frame
