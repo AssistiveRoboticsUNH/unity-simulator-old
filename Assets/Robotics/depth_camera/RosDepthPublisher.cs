@@ -29,12 +29,7 @@ public class RosDepthPublisher : MonoBehaviour
 
     static private void SetupCameraWithReplacementShader(Camera cam, Shader shader, Color clearColor)
     {
-        // modes
-        // ObjectId = 0,
-        // CatergoryId = 1,
-        // DepthCompressed = 2,
-        // DepthMultichannel = 3,
-        // Normals = 4
+        
         int mode = 2;
         var cb = new CommandBuffer();
         cb.SetGlobalFloat("_OutputMode", mode); 
