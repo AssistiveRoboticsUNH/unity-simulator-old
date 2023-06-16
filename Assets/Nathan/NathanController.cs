@@ -227,6 +227,7 @@ namespace Nathan
             {
                 var tmp = agent.transform.forward; 
                 tmp = 0.02f*tmp.normalized;
+// fixedFrameRate*
                 agent.transform.position += tmp;
                 // tmp = 1.0f*tmp.normalized;
                 agent.velocity = tmp;
@@ -281,13 +282,13 @@ namespace Nathan
                 wait_until = milliseconds + 1000;
                 return;
             }
-            if (milliseconds > wait_until && Input.GetKey(KeyCode.P) && Input.GetKey(KeyCode.RightShift))
+            if (milliseconds > wait_until && Input.GetKey(KeyCode.N) && Input.GetKey(KeyCode.RightShift))
             {
                 animator.SetBool("take_pills", true);
                 wait_until = milliseconds + 1000;
                 return;
             }
-            if (milliseconds > wait_until && Input.GetKey(KeyCode.F) && Input.GetKey(KeyCode.RightShift))
+            if (milliseconds > wait_until && Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.RightShift))
             {
                 animator.SetBool("eating", true);
                 wait_until = milliseconds + 1000;
