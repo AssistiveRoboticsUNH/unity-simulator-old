@@ -5,8 +5,8 @@ using UnityEngine;
 ///     A simple free camera to be added to a Unity game object.
 ///     Keys:
 ///     wasd / arrows	- movement
-///     q/e 			- down/up (local space)
-///     r/f 			- up/down (world space)
+///     q/w 			- down/up (local space)
+///     z/x 			- up/down (world space)
 ///     pageup/pagedown	- up/down (world space)
 ///     hold shift		- enable fast movement mode
 ///     right mouse  	- enable free look
@@ -54,28 +54,28 @@ public class FreeCam : MonoBehaviour
         var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
         var movementSpeed = fastMode ? m_FastMovementSpeed : m_MovementSpeed;
 
-        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && !fastMode)
             transform.position = transform.position + -transform.right * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) && !fastMode )
             transform.position = transform.position + transform.right * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) && !fastMode)
             transform.position = transform.position + transform.forward * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) && !fastMode)
             transform.position = transform.position + -transform.forward * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetKey(KeyCode.Q)&& !fastMode)
             transform.position = transform.position + -transform.up * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.W)&& !fastMode)
             transform.position = transform.position + transform.up * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.PageUp))
+        if (Input.GetKey(KeyCode.Z) && !fastMode || Input.GetKey(KeyCode.PageUp) && !fastMode)
             transform.position = transform.position + Vector3.up * movementSpeed * Time.deltaTime;
 
-        if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.PageDown))
+        if (Input.GetKey(KeyCode.X) && !fastMode || Input.GetKey(KeyCode.PageDown)&& !fastMode)
             transform.position = transform.position + -Vector3.up * movementSpeed * Time.deltaTime;
 
         if (m_Looking)

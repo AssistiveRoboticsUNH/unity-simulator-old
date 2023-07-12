@@ -238,7 +238,7 @@ namespace Nathan
             
             agent.enabled = true;
             long milliseconds = DateTime.Now.Ticks / TimeSpan.TicksPerMillisecond;
-            if (milliseconds > wait_until && Input.GetKey(KeyCode.D) && Input.GetKey(KeyCode.RightShift))
+            if (milliseconds > wait_until && Input.GetKey(KeyCode.M) && Input.GetKey(KeyCode.RightShift))
             {
                 agent.SetDestination(door_pos.position);
                 wait_until = milliseconds + 1000;
@@ -264,14 +264,8 @@ namespace Nathan
             }
             if (milliseconds > wait_until && Input.GetKey(KeyCode.K) && Input.GetKey(KeyCode.RightShift))
             {
-                if ((agent.destination - pre_pills_pos.position).magnitude > 1)
-                {
-                    agent.SetDestination(pre_pills_pos.position);
-                }
-                else
-                {
-                    agent.SetDestination(pills_pos.position);
-                }
+                agent.SetDestination(pills_pos.position);
+                
                 wait_until = milliseconds + 1000;
                 return;
             }
@@ -282,13 +276,13 @@ namespace Nathan
                 wait_until = milliseconds + 1000;
                 return;
             }
-            if (milliseconds > wait_until && Input.GetKey(KeyCode.N) && Input.GetKey(KeyCode.RightShift))
+            if (milliseconds > wait_until && Input.GetKey(KeyCode.V) && Input.GetKey(KeyCode.RightShift))
             {
                 animator.SetBool("take_pills", true);
                 wait_until = milliseconds + 1000;
                 return;
             }
-            if (milliseconds > wait_until && Input.GetKey(KeyCode.E) && Input.GetKey(KeyCode.RightShift))
+            if (milliseconds > wait_until && Input.GetKey(KeyCode.J) && Input.GetKey(KeyCode.RightShift))
             {
                 animator.SetBool("eating", true);
                 wait_until = milliseconds + 1000;
