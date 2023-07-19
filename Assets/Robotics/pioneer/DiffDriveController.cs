@@ -28,12 +28,10 @@ public class DiffDriveController : MonoBehaviour
     private List<float> forces;
     private List<int> startIndices;
 
-    // Start is called before the first frame update
+    private ROSInterface ros_interface;
     void Start()
     {
-        ros = ROSConnection.GetOrCreateInstance();
-        ros.Subscribe<TwistMsg>(topicName, NewCommand);
-        
+        ros_interface = FindObjectOfType<ROSInterface>();
         velocities = new List<float>();
         body.GetDriveTargetVelocities(velocities);
         forces = new List<float>();
@@ -42,15 +40,16 @@ public class DiffDriveController : MonoBehaviour
         body.GetDofStartIndices(startIndices);
     }
 
-    void NewCommand(TwistMsg cmd)
+    void SetVelocity()
     {
-        angularVel.z = (float)cmd.angular.x;
-        angularVel.x = (float)cmd.angular.y;
-        angularVel.y = (float)cmd.angular.z;
+        var twist = ros_interface.native_twist;
+        angularVel.z = (float) twist.angular.x;
+        angularVel.x = (float)twist.angular.y;
+        angularVel.y = (float)twist.angular.z;
 
-        linearVel.z = (float)cmd.linear.x;
-        linearVel.x = (float)cmd.linear.y;
-        linearVel.y = (float)cmd.linear.z;
+        linearVel.z = (float)twist.linear.x;
+        linearVel.x = (float)twist.linear.y;
+        linearVel.y = (float)twist.linear.z;
 
     }
 
@@ -60,6 +59,7 @@ public class DiffDriveController : MonoBehaviour
         
         // linearVel.z = 1f;
         // angularVel.y = 3f;
+        SetVelocity();
         
         float velLeft = (linearVel.z - angularVel.y * wheelSeparation / 2.0f) / wheelLeftRadius;
         float velRight = (linearVel.z + angularVel.y * wheelSeparation / 2.0f) / wheelRightRadius;

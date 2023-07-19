@@ -1,27 +1,50 @@
+#include <iostream>
+#include <vector>
 #include <chrono>
+#include <thread>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/int32.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 #include "tf2_ros/transform_broadcaster.h"
 
 #include "interface.h"
 
+
 using namespace std::chrono_literals;
-
-
-#include <iostream>
-#include <vector>
+using std::placeholders::_1;
 
 
 class MinimalPublisher : public rclcpp::Node {
 public:
-    MinimalPublisher() : Node("minimal_publisher") {
-        eating_publisher_ = this->create_publisher<std_msgs::msg::Int32>("person_eating", 10);
-        taking_medicine_publisher_ = this->create_publisher<std_msgs::msg::Int32>("person_taking_medicine", 10);
-        odom_publisher_ = this->create_publisher<nav_msgs::msg::Odometry>("odom", 10);
+    MinimalPublisher() : Node("unity_ros_interface_publisher_node") {
+        eating_publisher_ = create_publisher<std_msgs::msg::Int32>("person_eating", 10);
+        taking_medicine_publisher_ = create_publisher<std_msgs::msg::Int32>("person_taking_medicine", 10);
+        odom_publisher_ = create_publisher<nav_msgs::msg::Odometry>("odom", 10);
         tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+
+        sub_node_ = std::make_unique<Node>("unity_ros_interface_subscriber_node");
+        cmd_vel_subscriber_ = sub_node_->create_subscription<geometry_msgs::msg::Twist>("cmd_vel", 10, std::bind(
+                &MinimalPublisher::cmd_vel_callback, this, _1));
+
+        spin_thread_ = std::make_shared<std::thread>([this]() {
+                                        while (true) {
+                                            spin_some(sub_node_);
+                                            std::lock_guard<std::mutex> lock(mutex_);
+                                            if (shutdown) {
+                                                break;
+                                            }
+                                        }
+                                    }
+        );
+    }
+
+    ~MinimalPublisher(){
+        std::lock_guard<std::mutex> lock(mutex_);
+        shutdown = true;
+        spin_thread_->join();
     }
 
     void publishTF(const NativeTransform *input) {
@@ -77,13 +100,26 @@ public:
         odom_publisher_->publish(message);
     }
 
+    geometry_msgs::msg::Twist cmd_vel;
+    std::mutex mutex_;
+    bool shutdown = false;
+
 private:
+    void cmd_vel_callback(const geometry_msgs::msg::Twist::SharedPtr msg) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        cmd_vel = *msg;
+    }
 
     rclcpp::TimerBase::SharedPtr timer_;
     rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr eating_publisher_;
     rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr taking_medicine_publisher_;
     rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_publisher_;
     std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+
+    rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_subscriber_;
+    Node::SharedPtr sub_node_;
+    std::shared_ptr<std::thread> spin_thread_;
+
 };
 
 bool rosInitialized = false;
@@ -116,6 +152,16 @@ public:
         node_->PublishOdom(input);
     }
 
+    void ReceiveCmdVel(NativeTwist *output) {
+        std::lock_guard<std::mutex> lock(node_->mutex_);
+        output->linear.x = node_->cmd_vel.linear.x;
+        output->linear.y = node_->cmd_vel.linear.y;
+        output->linear.z = node_->cmd_vel.linear.z;
+        output->angular.x = node_->cmd_vel.angular.x;
+        output->angular.y = node_->cmd_vel.angular.y;
+        output->angular.z = node_->cmd_vel.angular.z;
+    }
+
 
     std::shared_ptr<MinimalPublisher> node_;
 
@@ -145,7 +191,7 @@ void PublishOdom(std::intptr_t handle, NativeOdom *input) {
     ptr->PublishOdom(input);
 }
 
-//void ReceiveCmdVel(std::intptr_t handle, NativeVector3 *output) {
-//    auto ptr = (ROSInterface *) handle;
-////    ptr->ReceiveOdom(output);
-//}
+void ReceiveCmdVel(std::intptr_t handle, NativeTwist *output) {
+    auto ptr = (ROSInterface *) handle;
+    ptr->ReceiveCmdVel(output);
+}

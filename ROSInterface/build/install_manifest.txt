@@ -1,1 +1,0 @@
-/home/ola/My_project/unity-simulator/ROSInterface/../Assets/Plugins/lib/libROSInterface.so

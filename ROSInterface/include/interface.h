@@ -27,6 +27,12 @@ struct NativeVector3 {
 
 };
 
+struct NativeTwist {
+    NativeVector3 linear;
+    NativeVector3 angular;
+
+};
+
 struct NativeTransform {
     char *frame_id = nullptr;
     char *child_frame_id = nullptr;
@@ -53,7 +59,7 @@ extern "C" {
 MY_LIB_API void PublishTF(std::intptr_t handle, NativeTransform *input);
 MY_LIB_API void PublishActivity(std::intptr_t handle, NativeActivity *input);
 MY_LIB_API void PublishOdom(std::intptr_t handle, NativeOdom *input);
-//MY_LIB_API void ReceiveCmdVel(std::intptr_t handle, NativeVector3 *output);
+MY_LIB_API void ReceiveCmdVel(std::intptr_t handle, NativeTwist *output);
 MY_LIB_API std::intptr_t Init();
 MY_LIB_API void Destroy(std::intptr_t handle);
 }

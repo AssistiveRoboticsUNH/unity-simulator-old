@@ -17,9 +17,7 @@ public class DiffDriveControllerJackal : MonoBehaviour
     public ArticulationBody body;
 
     public float wheelRadius = 0.1f;
-    public float wheelSeparation = 0.36f;
-    
-    public float wheelSeparationMultiplier = 2f;
+    public float wheelSeparation = 1.5f;
     // public float gain = .5f;
 
     ROSConnection ros;
@@ -50,9 +48,9 @@ public class DiffDriveControllerJackal : MonoBehaviour
 
     void NewCommand(TwistMsg cmd)
     {
-        angularVel.z = (float)cmd.angular.x*1f;
-        angularVel.x = (float)cmd.angular.y*1f;
-        angularVel.y = (float)cmd.angular.z*1f;
+        angularVel.z = (float)cmd.angular.x*2;
+        angularVel.x = (float)cmd.angular.y*2;
+        angularVel.y = (float)cmd.angular.z*2;
 
         linearVel.z = (float)cmd.linear.x;
         linearVel.x = (float)cmd.linear.y;
@@ -67,8 +65,8 @@ public class DiffDriveControllerJackal : MonoBehaviour
         // linearVel.z = 1f;
         // angularVel.y = 3f;
         
-        float velLeft = (linearVel.z - angularVel.y * wheelSeparation * wheelSeparationMultiplier / 2.0f) / wheelRadius;
-        float velRight = (linearVel.z + angularVel.y * wheelSeparation * wheelSeparationMultiplier / 2.0f) / wheelRadius;
+        float velLeft = (linearVel.z - angularVel.y * wheelSeparation / 2.0f) / wheelRadius;
+        float velRight = (linearVel.z + angularVel.y * wheelSeparation / 2.0f) / wheelRadius;
 
 
         velocities[startIndices[wheelLeftRear.index]] = velLeft;

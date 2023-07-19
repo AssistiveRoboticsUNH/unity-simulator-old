@@ -10,7 +10,7 @@ public class OdomPublisherCMD : MonoBehaviour
 {
     public Transform transform;
     ROSConnection ros;
-    public string topicName = "/jackal_velocity_controller/odom";
+    public string topicName = "odom";
 
     public string FrameId = "odom";
 
@@ -49,27 +49,14 @@ public class OdomPublisherCMD : MonoBehaviour
             msg.header.stamp.sec = sec;
             msg.header.stamp.nanosec = nanosec;
             msg.pose.pose.orientation.w = -transform.rotation.w;
-            msg.pose.pose.orientation.y = -transform.rotation.y;
-            msg.pose.pose.orientation.z = transform.rotation.z;
-            msg.pose.pose.orientation.x = transform.rotation.x;
+            msg.pose.pose.orientation.y = -transform.rotation.x;
+            msg.pose.pose.orientation.z = transform.rotation.y;
+            msg.pose.pose.orientation.x = transform.rotation.z;
 
             msg.pose.pose.position.y = -transform.position.x;
             msg.pose.pose.position.z = transform.position.y;
             msg.pose.pose.position.x = transform.position.z;
 
-            // msg.pose.covariance[0] = 0.01;
-            // msg.pose.covariance[7] = 0.01;
-            // msg.pose.covariance[14] = 0.1;
-            // msg.pose.covariance[21] = 0.1;
-            // msg.pose.covariance[28] = 0.1;
-            // msg.pose.covariance[35] = 0.1;
-            //
-            // msg.twist.covariance[0] = 0.1;
-            // msg.twist.covariance[7] = 0.1;
-            // msg.twist.covariance[14] = 0.1;
-            // msg.twist.covariance[21] = 0.1;
-            // msg.twist.covariance[28] = 0.1;
-            // msg.twist.covariance[35] = 0.1;
             msg.pose.covariance[0] = 0.1;
             msg.pose.covariance[7] = 0.1;
             msg.pose.covariance[14] = 1000000000000.0;
