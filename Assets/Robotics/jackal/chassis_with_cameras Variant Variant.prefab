@@ -1,0 +1,99 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1406323242958984663
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 830529745429173566, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: -0.10899997
+      objectReference: {fileID: 0}
+    - target: {fileID: 830529745429173566, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.z
+      value: -0.16599989
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763891482301761597, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_Name
+      value: chassis_with_cameras Variant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6067871747735536452, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: topicName
+      value: /jackal_velocity_controller/odom
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.187
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7407496196529396486, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884789788453481, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.x
+      value: -0.15499997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884789788453481, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: -0.055000067
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884789788453481, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.z
+      value: 0.045000076
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884791531700349, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.x
+      value: 0.15499997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884791531700349, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.y
+      value: -0.055000067
+      objectReference: {fileID: 0}
+    - target: {fileID: 8847884791531700349, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}
+      propertyPath: m_ParentAnchorPosition.z
+      value: 0.045000076
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4432f67024443e3f18b5d5712db2e03c, type: 3}

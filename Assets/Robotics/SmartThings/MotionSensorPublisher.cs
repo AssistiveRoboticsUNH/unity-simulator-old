@@ -18,7 +18,7 @@ public class MotionSensorPublisher : MonoBehaviour
     // Publish the cube's position and rotation every N secondsffffff
     public float publishMessageFrequency = 0.5f;
     private float timeElapsed;
-
+    
     void Start()
     {
         // start the ROS connection
